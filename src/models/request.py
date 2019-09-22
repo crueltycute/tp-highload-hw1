@@ -2,10 +2,16 @@ class Request:
     def __init__(self, data, connection=''):
         request_data = data.split(b'\n')[0].split()
 
-        self.method = request_data[0]
-        self.url = request_data[1].split(b'?')[0]
-        self.protocol = request_data[2]
-        self.connection = connection
+        if len(request_data) != 0:
+            self.method = request_data[0]
+            self.url = request_data[1].split(b'?')[0]
+            self.protocol = request_data[2]
+            self.connection = connection
+        else:
+            self.method = ''
+            self.url = ''
+            self.protocol = b'HTTP/1.1\r'
+            self.connection = 'close'
 
     @property
     def get_method(self):
