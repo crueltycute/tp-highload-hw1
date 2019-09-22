@@ -1,0 +1,24 @@
+class Request:
+    def __init__(self, data, connection=''):
+        request_data = data.split(b'\n\r')[0].split(' ')
+
+        self.method = request_data[0]
+        self.url = request_data[1]
+        self.protocol = request_data[2]
+        self.connection = connection
+
+    @property
+    def get_method(self):
+        return self.method
+
+    @property
+    def get_url(self):
+        return self.url
+
+    @property
+    def get_protocol(self):
+        return self.protocol
+
+    @property
+    def get_connection(self):
+        return self.connection
