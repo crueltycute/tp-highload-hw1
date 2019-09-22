@@ -4,7 +4,7 @@ from server.server import Server
 
 
 # CONFIG_FILE_NAME = '../httpd.conf'
-CONFIG_FILE_NAME = '/etc/httpd.conf'
+CONFIG_FILE_NAME = 'httpd.conf'
 
 
 def main():
@@ -17,12 +17,10 @@ def main():
     server = Server(config, handler)
     try:
         server.launch()
-        print('Server started')
+        print(f'Server is launching on {config.host}:{config.port}')
     except KeyboardInterrupt:
         server.stop()
         print('Server stopped')
-
-    # print(f'Server is launching on {config.host}:{config.port}')
 
 
 if __name__ == '__main__':

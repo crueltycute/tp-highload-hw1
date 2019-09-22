@@ -1,9 +1,9 @@
 class Request:
     def __init__(self, data, connection=''):
-        request_data = data.split(b'\n\r')[0].split(' ')
+        request_data = data.split(b'\n')[0].split()
 
         self.method = request_data[0]
-        self.url = request_data[1]
+        self.url = request_data[1].split(b'?')[0]
         self.protocol = request_data[2]
         self.connection = connection
 

@@ -1,4 +1,4 @@
-from asyncio import StreamReader, StreamWriter
+# from asyncio import StreamReader, StreamWriter
 
 from handler.executor import Executor
 from handler.serializer import Serializer
@@ -15,11 +15,12 @@ class Handler:
         self.executor = Executor(document_root)
         self.serializer = Serializer()
 
-    async def handle(self, reader: StreamReader, writer: StreamWriter):
-        data = b''
+    async def handle(self, reader, writer):
+        data = b""
 
         while True:
-            data += reader.read(CHUNK_SIZE)
+            chunk = await reader.read(CHUNK_SIZE)
+            data += chunk
 
             if not data or reader.at_eof() or data[-4:] == b'\r\n\r\n':
                 break
@@ -30,4 +31,4 @@ class Handler:
             response = await self.serializer.dump(response_data)
             writer.write(response)
             await writer.drain()
-            writer.close()
+        writer.close()

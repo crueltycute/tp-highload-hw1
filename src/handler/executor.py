@@ -1,6 +1,6 @@
 import os
 import aiofiles
-import urllib
+import urllib.parse
 
 from models.response import Response
 
@@ -36,9 +36,7 @@ class Executor:
         self.document_root = document_root
 
     async def execute(self, request):
-        if len(request) == 0:
-            return Response(ALLOWED_CODES.get(403), request.get_protocol, request.get_connection)
-        elif request.get_method == ALLOWED_METHODS.get('HEAD'):
+        if request.get_method == ALLOWED_METHODS.get('HEAD'):
             return await self.execute_head(request)
         elif request.get_method == ALLOWED_METHODS.get('GET'):
             return await self.execute_get(request)
@@ -70,7 +68,7 @@ class Executor:
                             body=body)
 
     def get_file_info(self, request):
-        file_path = request.get_url().decode()
+        file_path = request.get_url.decode()
         file_path = urllib.parse.unquote(file_path, encoding='utf-8', errors='replace')
         if len(file_path.split('../')) > 1:
             return 403

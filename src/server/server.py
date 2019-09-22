@@ -18,7 +18,7 @@ class Server:
                                    host=self.config.host,
                                    port=self.config.port,
                                    loop=loop,
-                                   reusePort=True)
+                                   reuse_port=True)
 
     def launch(self):
         processes = []
@@ -30,13 +30,13 @@ class Server:
             if process_id == 0:
                 for j in range(self.config.threads):
                     self.loop.create_task(self.start_coroutine(self.loop))
-                # try:
-                self.loop.run_forever()
-                # except KeyboardInterrupt:
-                #     self.stop()
-                #     print('Server stopped')
-                # finally:
-                #     print('Server is shutting down\n')
+                try:
+                    self.loop.run_forever()
+                except KeyboardInterrupt:
+                    self.stop()
+                    print('Server stopped')
+                finally:
+                    print('Server is shutting down\n')
 
         print(f'Processes: {processes}')
         for p in processes:
