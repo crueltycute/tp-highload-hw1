@@ -13,3 +13,8 @@ cd http-test-suite
 python2 httptest.py
 ```
  
+ #### My server RPS:
+ ![](myawesomeserver.png)
+ 
+ #### Nginx RPS:
+ ![](nginx.png)

@@ -9,7 +9,7 @@ class Response:
         self.content_type = content_type
         self.content_length = content_length
         self.body = body
-        self.server = 'server'
+        self.server = 'MyAwesomeServer'
         self.date = datetime.today()
 
     @property

@@ -49,8 +49,3 @@ class Config:
                 self.document_root = DEFAULT_DOC_ROOT
             else:
                 self.document_root = config_data['document_root']
-
-    def __str__(self):
-        return f'host: {self.host}\nport: {self.port}\n' \
-               f'cpu_limit: {self.cpu_limit}\nthreads: {self.threads}\n' \
-               f'document_root: {self.document_root}\n'
