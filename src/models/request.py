@@ -10,7 +10,7 @@ class Request:
         else:
             self.method = ''
             self.url = ''
-            self.protocol = b'HTTP/1.1\r'
+            self.protocol = b''
             self.connection = 'close'
 
     @property

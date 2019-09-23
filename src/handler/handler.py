@@ -1,8 +1,5 @@
-# from asyncio import StreamReader, StreamWriter
-
 from handler.executor import Executor
 from handler.serializer import Serializer
-
 from models.request import Request
 
 
@@ -16,7 +13,7 @@ class Handler:
         self.serializer = Serializer()
 
     async def handle(self, reader, writer):
-        data = b""
+        data = b''
 
         while True:
             chunk = await reader.read(CHUNK_SIZE)
@@ -27,8 +24,11 @@ class Handler:
 
         if len(data) > 0:
             request = Request(data)
+
             response_data = await self.executor.execute(request)
             response = await self.serializer.dump(response_data)
+
             writer.write(response)
             await writer.drain()
+
         writer.close()

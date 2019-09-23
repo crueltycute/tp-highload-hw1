@@ -18,17 +18,17 @@ ALLOWED_CODES = {
 }
 
 ALLOWED_CONTENT_TYPES = {
-        'html': 'text/html',
-        'css': 'text/css',
-        'js': 'application/javascript',
-        'jpg': 'image/jpeg',
-        'jpeg': 'image/jpeg',
-        'png': 'image/png',
-        'gif': 'image/gif',
-        'swf': 'application/x-shockwave-flash',
-        'txt': 'text/txt',
-        'default': 'text/plain'
-    }
+    'html': 'text/html',
+    'css': 'text/css',
+    'js': 'application/javascript',
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg',
+    'png': 'image/png',
+    'gif': 'image/gif',
+    'swf': 'application/x-shockwave-flash',
+    'txt': 'text/txt',
+    'default': 'text/plain'
+}
 
 
 class Executor:
@@ -74,7 +74,7 @@ class Executor:
             return 403
 
         if file_path[-1:] == '/':
-            file = self.document_root + file_path + "index.html"
+            file = self.document_root + file_path + 'index.html'
         else:
             file = self.document_root + file_path
 
@@ -84,12 +84,15 @@ class Executor:
             content = ''
 
         if not os.path.isfile(file):
-            if file_path[-1:] == '/' and file_path.count(".") < 1:
+            if file_path[-1:] == '/' and file_path.count('.') < 1:
                 return 403
             else:
                 return 404
 
-        return {'file_name': file, 'file_path': file_path, 'content_type': content, 'content_length': os.path.getsize(file)}
+        return {'file_name': file,
+                'file_path': file_path,
+                'content_type': content,
+                'content_length': os.path.getsize(file)}
 
     @staticmethod
     async def read_file(filename):
