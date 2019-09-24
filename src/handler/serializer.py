@@ -4,7 +4,7 @@ class Serializer:
 
     @staticmethod
     async def dump(response):
-        print(f'Response: {response.status}\n')
+        # print(f'Response: {response.status}\n')
         if response.status == '200 OK':
             return Serializer.good_resp(response).encode() + response.body
         else:
