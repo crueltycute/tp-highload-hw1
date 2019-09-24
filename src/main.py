@@ -13,7 +13,11 @@ def main():
     handler = Handler(config.document_root)
 
     server = Server(config, handler)
-    server.launch()
+    try:
+        print(f'Starting server\n')
+        server.launch()
+    except KeyboardInterrupt:
+        server.stop()
 
 
 if __name__ == '__main__':

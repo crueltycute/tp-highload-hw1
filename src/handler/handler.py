@@ -26,6 +26,7 @@ class Handler:
             request = Request(data)
 
             response_data = await self.executor.execute(request)
+
             response = await self.serializer.dump(response_data)
 
             writer.write(response)

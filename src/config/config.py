@@ -16,8 +16,6 @@ class Config:
         self.document_root = document_root
 
     def read(self, file_name):
-        print(f'Reading config data from {file_name}\n')
-
         config_data = {}
 
         with open(file_name, 'r') as config_file:
@@ -49,3 +47,11 @@ class Config:
                 self.document_root = DEFAULT_DOC_ROOT
             else:
                 self.document_root = config_data['document_root']
+
+        print(f'\nConfig read from file: {file_name}\n')
+
+        print(f'host: {self.host} \n'
+              f'port: {self.port} \n'
+              f'cpu limit: {self.cpu_limit}\n'
+              f'threads: {self.threads}\n'
+              f'document_root: {self.document_root}\n')

@@ -37,10 +37,13 @@ class Executor:
 
     async def execute(self, request):
         if request.get_method == ALLOWED_METHODS.get('HEAD'):
+            print('Request: HEAD')
             return await self.execute_head(request)
         elif request.get_method == ALLOWED_METHODS.get('GET'):
+            print('Request: GET')
             return await self.execute_get(request)
         else:
+            print('Request: Unknown')
             return Response(ALLOWED_CODES.get(405), request.get_protocol, request.get_connection)
 
     async def execute_head(self, request):

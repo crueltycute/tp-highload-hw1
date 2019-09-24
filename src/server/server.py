@@ -30,15 +30,8 @@ class Server:
             if process_id == 0:
                 for j in range(self.config.threads):
                     self.loop.create_task(self.start_coroutine(self.loop))
-                try:
-                    self.loop.run_forever()
-                except KeyboardInterrupt:
-                    self.stop()
-                    print('Server stopped')
-                finally:
-                    print('Server is shutting down\n')
+                self.loop.run_forever()
 
-        print(f'Processes: {processes}')
         for p in processes:
             os.waitpid(p, 0)
 
