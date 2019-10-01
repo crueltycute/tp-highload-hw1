@@ -14,7 +14,7 @@ class Server:
 
         asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
-    async def start_coroutine(self, loop):
+    async def start_thread(self, loop):
         await asyncio.start_server(client_connected_cb=self.handler.handle,
                                    host=self.config.host,
                                    port=self.config.port,
@@ -31,7 +31,7 @@ class Server:
             if process_id == 0:
                 self.loop = asyncio.get_event_loop()
                 for j in range(self.config.threads):
-                    self.loop.create_task(self.start_coroutine(self.loop))
+                    self.loop.create_task(self.start_thread(self.loop))
                 self.loop.run_forever()
 
         print(f'Number of launched subservers: {len(processes)}')
