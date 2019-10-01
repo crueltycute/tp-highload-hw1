@@ -3,12 +3,13 @@ from handler.handler import Handler
 from server.server import Server
 
 
-CONFIG_FILE_NAME = 'httpd.conf'
+CONFIG_FILE_NAME = './httpd.conf'
 
 
 def main():
     config = Config()
     config.read(CONFIG_FILE_NAME)
+    print(config)
 
     handler = Handler(config.document_root)
 

@@ -1,7 +1,7 @@
 DEFAULT_HOST = '0.0.0.0'
 DEFAULT_PORT = '80'
 DEFAULT_CPU_LIMIT = 4
-DEFAULT_THREADS = 20
+DEFAULT_THREADS = 3
 DEFAULT_DOC_ROOT = '/var/www/html'
 
 
@@ -38,10 +38,10 @@ class Config:
             else:
                 self.cpu_limit = int(config_data['cpu_limit'])
 
-            if config_data.get('threads') is None:
+            if config_data.get('thread_limit') is None:
                 self.threads = DEFAULT_THREADS
             else:
-                self.threads = int(config_data['threads'])
+                self.threads = int(config_data['thread_limit'])
 
             if config_data.get('document_root') is None:
                 self.document_root = DEFAULT_DOC_ROOT
@@ -50,7 +50,8 @@ class Config:
 
         print(f'\nConfig read from file: {file_name}\n')
 
-        print(f'host: {self.host} \n'
+    def __str__(self):
+        return (f'host: {self.host} \n'
               f'port: {self.port} \n'
               f'cpu limit: {self.cpu_limit}\n'
               f'threads: {self.threads}\n'

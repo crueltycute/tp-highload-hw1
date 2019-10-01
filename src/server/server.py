@@ -9,8 +9,9 @@ from handler.handler import Handler
 class Server:
     def __init__(self, config: Config, handler: Handler):
         self.config = config
+        self.loop = None
         self.handler = handler
-        self.loop = asyncio.get_event_loop()
+
         asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
     async def start_coroutine(self, loop):
@@ -28,12 +29,17 @@ class Server:
             processes.append(process_id)
 
             if process_id == 0:
+                self.loop = asyncio.get_event_loop()
                 for j in range(self.config.threads):
                     self.loop.create_task(self.start_coroutine(self.loop))
                 self.loop.run_forever()
+
+        print(f'Number of launched subservers: {len(processes)}')
+        print(f'Subservers PID: {processes}')
 
         for p in processes:
             os.waitpid(p, 0)
 
     def stop(self):
-        self.loop.stop()
+        if not self.loop is None:
+            self.loop.stop()
